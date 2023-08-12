@@ -52,15 +52,16 @@ class CategoryCard extends StatelessWidget {
             children: [
               FaIcon(
                 icon,
-                color: selected ? Colors.white : Colors.black,
+                color: selected ? Colors.white : Colors.black54,
               ),
+              const SizedBox(height: 3),
               Text(
                 label,
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 style: TextStyle(
-                  color: selected ? Colors.white : Colors.black,
+                  color: selected ? Colors.white : Colors.black54,
                   fontSize: 11,
                 ),
               ),

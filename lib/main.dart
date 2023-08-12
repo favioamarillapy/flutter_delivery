@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'Material App',
       //initialRoute: "/product-detail",
       routes: {
-        "/": (context) => HomeScreen(),
+        "/": (context) => const HomeScreen(),
         "/product-detail": (context) => const ProductDetailScreen(),
       },
       theme: _getTheme(),
@@ -27,6 +27,9 @@ ThemeData _getTheme() {
     fontFamily: "Arial",
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.transparent,
+    ),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: Color.fromRGBO(254, 78, 2, 1),
     ),
   );
 }
