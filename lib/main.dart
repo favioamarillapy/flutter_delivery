@@ -11,9 +11,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      initialRoute: "/product-detail",
+      //initialRoute: "/product-detail",
       routes: {
-        "/": (context) => const HomeScreen(),
+        "/": (context) => HomeScreen(),
         "/product-detail": (context) => const ProductDetailScreen(),
       },
       theme: _getTheme(),
@@ -22,7 +22,9 @@ class MyApp extends StatelessWidget {
 }
 
 ThemeData _getTheme() {
-  return ThemeData.light().copyWith(
+  return ThemeData(
+    scaffoldBackgroundColor: const Color.fromARGB(255, 246, 246, 246),
+    fontFamily: "Arial",
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.transparent,
     ),

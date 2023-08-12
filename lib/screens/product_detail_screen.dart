@@ -8,28 +8,29 @@ class ProductDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Stack(
-                children: [
-                  _PosterImage(),
-                  _PosterButtons(),
-                ],
-              ),
-              Padding(
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                _PosterImage(),
+                _PosterButtons(),
+              ],
+            ),
+            Expanded(
+              child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   children: [
                     _Title(),
+                    _Sizes(),
                     SizedBox(height: 20),
                     _Description(),
-                    _PriceSection()
                   ],
                 ),
               ),
-            ],
-          ),
+            ),
+            _PriceSection(),
+          ],
         ),
       ),
     );
@@ -89,7 +90,7 @@ class _Title extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 30),
+      padding: const EdgeInsets.only(top: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -142,13 +143,76 @@ class _Description extends StatelessWidget {
   }
 }
 
+class _Sizes extends StatelessWidget {
+  const _Sizes();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _PropertieSection("Tamaño", "Mediano"),
+          VerticalDivider(
+            width: 20,
+            thickness: 1,
+            indent: 20,
+            endIndent: 0,
+            color: Colors.red,
+          ),
+          _PropertieSection("Calorias", "150 Kcal"),
+          VerticalDivider(
+            width: 20,
+            thickness: 1,
+            indent: 20,
+            endIndent: 0,
+            color: Colors.red,
+          ),
+          _PropertieSection("Cocina", "5 - 10 Min."),
+        ],
+      ),
+    );
+  }
+}
+
+class _PropertieSection extends StatelessWidget {
+  final String title;
+  final String subTitle;
+
+  const _PropertieSection(this.title, this.subTitle);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          title,
+          style: const TextStyle(
+            color: Colors.grey,
+            fontSize: 15,
+          ),
+        ),
+        Text(
+          subTitle,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class _PriceSection extends StatelessWidget {
   const _PriceSection();
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 50),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      color: const Color.fromARGB(125, 240, 236, 236),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
