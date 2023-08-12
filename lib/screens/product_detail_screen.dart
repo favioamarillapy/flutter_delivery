@@ -47,9 +47,9 @@ class _PosterImage extends StatelessWidget {
       color: const Color.fromARGB(125, 240, 236, 236),
       child: const FadeInImage(
         placeholder: NetworkImage(
-            "https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image.jpg"),
+            "https://bk-latam-prod.s3.amazonaws.com/sites/burgerking.com.py/files/whopper%20tejano.png"),
         image: NetworkImage(
-            "https://bk-latam-prod.s3.amazonaws.com/sites/burgerking.com.py/files/whopper.png"),
+            "https://bk-latam-prod.s3.amazonaws.com/sites/burgerking.com.py/files/whopper%20tejano.png"),
       ),
     );
   }
