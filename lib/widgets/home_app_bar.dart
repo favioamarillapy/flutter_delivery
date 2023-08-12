@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_delivery/widgets/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({super.key});
@@ -13,7 +14,7 @@ class CustomAppBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           CustomIconButton(
-            icon: Icons.reorder,
+            icon: FontAwesomeIcons.bars,
             color: Colors.white70,
             onPressed: () {},
           ),
@@ -44,7 +45,7 @@ class CustomAppBar extends StatelessWidget {
             ],
           ),
           CustomIconButton(
-            icon: Icons.add_alert,
+            icon: FontAwesomeIcons.bell,
             color: Colors.white70,
             onPressed: () {},
           ),
