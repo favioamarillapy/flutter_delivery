@@ -103,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       extendBody: true,
       body: Column(
         children: [
-          const SizedBox(height: 10),
+          const SizedBox(height: 15),
           const CustomAppBar(),
           const PromotioCard(),
           CategoryList(),

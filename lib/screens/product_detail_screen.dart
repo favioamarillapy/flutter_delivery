@@ -70,7 +70,7 @@ class _PosterButtons extends StatelessWidget {
             CustomIconButton(
               icon: Icons.arrow_back,
               color: Colors.white70,
-              onPressed: () {},
+              onPressed: () => Navigator.of(context).pop(),
             ),
             CustomIconButton(
               icon: Icons.favorite_border_sharp,
