@@ -63,10 +63,11 @@ class PromotioCard extends StatelessWidget {
                 left: 160,
                 top: -45,
                 child: FadeInImage(
-                    placeholder: NetworkImage(
-                        "https://bk-latam-prod.s3.amazonaws.com/sites/burgerking.com.py/files/whopper%20tejano.png"),
-                    image: NetworkImage(
-                        "https://bk-latam-prod.s3.amazonaws.com/sites/burgerking.com.py/files/whopper%20tejano.png")),
+                  placeholder: NetworkImage(
+                      "https://bk-latam-prod.s3.amazonaws.com/sites/burgerking.com.py/files/whopper%20tejano.png"),
+                  image: NetworkImage(
+                      "https://bk-latam-prod.s3.amazonaws.com/sites/burgerking.com.py/files/whopper%20tejano.png"),
+                ),
               ),
             ],
           ),
