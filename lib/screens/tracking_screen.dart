@@ -1,6 +1,6 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_delivery/theme/app_theme.dart';
 import 'package:flutter_delivery/widgets/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -38,7 +38,7 @@ class TrackingScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
                   width: double.infinity,
-                  color: const Color.fromRGBO(254, 78, 2, 1),
+                  color: themePrimaryColor,
                   child: TextButton(
                     onPressed: () {},
                     child: const Text(
@@ -64,30 +64,30 @@ class _DeliveryTrackingInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
-              CircleAvatar(
+              const CircleAvatar(
                 backgroundImage: AssetImage("assets/tracking.png"),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
-                      Text(
+                      const Text(
                         "En camino",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 17,
                         ),
                       ),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 5),
                         child: Text(
                           "|",
@@ -99,12 +99,12 @@ class _DeliveryTrackingInfo extends StatelessWidget {
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 17,
-                          color: Color.fromRGBO(254, 78, 2, 1),
+                          color: themePrimaryColor,
                         ),
                       ),
                     ],
                   ),
-                  Text(
+                  const Text(
                     "Calle 13 de Setiembre c/ Rca El Salvador",
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
@@ -167,7 +167,7 @@ class _DeliveryData extends StatelessWidget {
                 icon: FontAwesomeIcons.message,
                 iconColor: Colors.white,
                 iconSize: 15,
-                color: const Color.fromRGBO(254, 78, 2, 1),
+                color: themePrimaryColor,
                 radius: 50,
                 onPressed: () {},
               ),
@@ -176,7 +176,7 @@ class _DeliveryData extends StatelessWidget {
                 icon: FontAwesomeIcons.phone,
                 iconColor: Colors.white,
                 iconSize: 15,
-                color: const Color.fromRGBO(254, 78, 2, 1),
+                color: themePrimaryColor,
                 radius: 50,
                 onPressed: () {},
               ),

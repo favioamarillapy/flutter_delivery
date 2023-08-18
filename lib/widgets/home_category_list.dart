@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_delivery/models/models.dart';
+import 'package:flutter_delivery/theme/app_theme.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CategoryList extends StatelessWidget {
@@ -47,7 +48,7 @@ class CategoryCard extends StatelessWidget {
         child: Container(
           width: 90,
           padding: const EdgeInsets.all(5),
-          color: selected ? const Color.fromRGBO(254, 78, 2, 1) : Colors.white,
+          color: selected ? themePrimaryColor : Colors.white,
           child: Column(
             children: [
               FaIcon(

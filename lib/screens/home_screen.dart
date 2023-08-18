@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_delivery/theme/app_theme.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:circular_reveal_animation/circular_reveal_animation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_delivery/widgets/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -101,8 +102,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       bottomNavigationBar: AnimatedBottomNavigationBar.builder(
         itemCount: iconList.length,
         tabBuilder: (int index, bool isActive) {
-          final color =
-              isActive ? const Color.fromRGBO(254, 78, 2, 1) : Colors.black54;
+          final color = isActive ? themePrimaryColor : Colors.black54;
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -115,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         },
         backgroundColor: const Color.fromARGB(255, 246, 246, 246),
         activeIndex: _bottomNavIndex,
-        splashColor: const Color.fromRGBO(254, 78, 2, 1),
+        splashColor: themePrimaryColor,
         notchAndCornersAnimation: borderRadiusAnimation,
         splashSpeedInMilliseconds: 300,
         notchSmoothness: NotchSmoothness.defaultEdge,
@@ -195,7 +195,7 @@ class _NavigationScreenState extends State<NavigationScreen>
               maxRadius: MediaQuery.of(context).size.longestSide * 1.1,
               child: Icon(
                 widget.iconData,
-                color: const Color.fromRGBO(254, 78, 2, 1),
+                color: themePrimaryColor,
                 size: 160,
               ),
             ),

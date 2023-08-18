@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_delivery/screens/screens.dart';
+import 'package:flutter_delivery/theme/app_theme.dart';
 
 void main() => runApp(const MyApp());
 
@@ -29,8 +30,8 @@ ThemeData _getTheme() {
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.transparent,
     ),
-    floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor: Color.fromRGBO(254, 78, 2, 1),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: themePrimaryColor,
     ),
   );
 }

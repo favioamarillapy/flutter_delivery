@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_delivery/data/products.dart';
+import 'package:flutter_delivery/theme/app_theme.dart';
 
 class ProductCard extends StatelessWidget {
   ProductCard({super.key});
@@ -51,8 +52,8 @@ class ProductCard extends StatelessWidget {
                       Text(
                         products[index].price,
                         textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          color: Color.fromRGBO(254, 78, 2, 1),
+                        style: TextStyle(
+                          color: themePrimaryColor,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),

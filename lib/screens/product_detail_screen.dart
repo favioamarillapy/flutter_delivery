@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_delivery/theme/app_theme.dart';
 import 'package:flutter_delivery/data/products.dart';
 import 'package:flutter_delivery/models/models.dart';
 import 'package:flutter_delivery/widgets/widgets.dart';
@@ -233,19 +234,19 @@ class _PriceSection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Text(
+          Text(
             "Gs. 30.000 ",
             style: TextStyle(
               fontSize: 25,
               fontWeight: FontWeight.bold,
-              color: Color.fromRGBO(254, 78, 2, 1),
+              color: themePrimaryColor,
             ),
           ),
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 40),
-              color: const Color.fromRGBO(254, 78, 2, 1),
+              color: themePrimaryColor,
               child: TextButton(
                 onPressed: () {},
                 child: const Text(

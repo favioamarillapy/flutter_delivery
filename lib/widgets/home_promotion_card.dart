@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_delivery/theme/app_theme.dart';
 
 class PromotioCard extends StatelessWidget {
   const PromotioCard({super.key});
@@ -11,7 +12,7 @@ class PromotioCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         child: Container(
           padding: const EdgeInsets.only(left: 20, top: 20),
-          color: const Color.fromRGBO(254, 78, 2, 1),
+          color: themePrimaryColor,
           width: double.infinity,
           height: 150,
           child: Stack(
@@ -48,10 +49,10 @@ class PromotioCard extends StatelessWidget {
                     color: Colors.white,
                     child: TextButton(
                       onPressed: () {},
-                      child: const Text(
+                      child: Text(
                         "Obtener",
                         style: TextStyle(
-                          color: Color.fromRGBO(254, 78, 2, 1),
+                          color: themePrimaryColor,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
