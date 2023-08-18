@@ -22,7 +22,6 @@ class DeliveryApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Delivery App',
-      //initialRoute: "/tracking",
       routes: {
         "/": (context) => const HomeScreen(),
         "/product-detail": (context) => const ProductDetailScreen(),

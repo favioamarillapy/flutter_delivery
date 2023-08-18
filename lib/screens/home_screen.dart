@@ -81,23 +81,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
-              decoration: const BoxDecoration(
-                color: Colors.blue,
+              decoration: BoxDecoration(
+                color: themePrimaryColor,
               ),
-              child: GestureDetector(
-                onTap: () => Navigator.pushNamed(context, "/tracking"),
-                child: const Text(
-                  'Demo Delivery',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30,
-                  ),
+              child: const Text(
+                'Demo Delivery',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
                 ),
               ),
             ),
             ListTile(
               title: const Text('Tracking'),
-              onTap: () {},
+              onTap: () => Navigator.pushNamed(context, "/tracking"),
             ),
           ],
         ),

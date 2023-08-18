@@ -32,7 +32,7 @@ class ProductDetailScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const _PriceSection(),
+            _PriceSection(product),
           ],
         ),
       ),
@@ -110,7 +110,7 @@ class _Title extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               maxLines: 3,
               style: const TextStyle(
-                fontSize: 24,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -159,7 +159,8 @@ class _Description extends StatelessWidget {
 }
 
 class _PriceSection extends StatelessWidget {
-  const _PriceSection();
+  final ProductResponse product;
+  const _PriceSection(this.product);
 
   @override
   Widget build(BuildContext context) {
@@ -171,11 +172,12 @@ class _PriceSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            "Gs. 30.000 ",
+            "\$ ${product.price}",
+            textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
               color: themePrimaryColor,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
             ),
           ),
           ClipRRect(
