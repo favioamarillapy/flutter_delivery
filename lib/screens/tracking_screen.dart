@@ -241,12 +241,7 @@ class _HeaderButtons extends StatelessWidget {
             icon: Icons.arrow_back,
             color: Colors.white70,
             onPressed: () => Navigator.of(context).pop(),
-          ),
-          CustomIconButton(
-            icon: Icons.favorite_border_sharp,
-            color: Colors.white70,
-            onPressed: () {},
-          ),
+          )
         ],
       ),
     );
