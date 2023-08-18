@@ -18,7 +18,7 @@ class PromotioCard extends StatelessWidget {
           child: Stack(
             children: [
               const Text(
-                "Obten un descuento",
+                "Discounts on electronics",
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 style: TextStyle(
@@ -50,7 +50,7 @@ class PromotioCard extends StatelessWidget {
                     child: TextButton(
                       onPressed: () {},
                       child: Text(
-                        "Obtener",
+                        "Claim voucher",
                         style: TextStyle(
                           color: themePrimaryColor,
                           fontWeight: FontWeight.bold,
@@ -63,11 +63,9 @@ class PromotioCard extends StatelessWidget {
               const Positioned(
                 left: 160,
                 top: -45,
-                child: FadeInImage(
-                  placeholder: NetworkImage(
-                      "https://bk-latam-prod.s3.amazonaws.com/sites/burgerking.com.py/files/whopper%20tejano.png"),
+                child: Image(
                   image: NetworkImage(
-                      "https://bk-latam-prod.s3.amazonaws.com/sites/burgerking.com.py/files/whopper%20tejano.png"),
+                      "https://static.vecteezy.com/system/resources/previews/010/869/748/original/laptop-computer-or-notebook-with-blank-screen-png.png"),
                 ),
               ),
             ],

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_delivery/data/products.dart';
+import 'package:flutter_delivery/providers/ProductProvider.dart';
 import 'package:flutter_delivery/theme/app_theme.dart';
+import 'package:provider/provider.dart';
 
 class ProductCard extends StatelessWidget {
   ProductCard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final products = Provider.of<ProductProvider>(context).products;
+
     return Expanded(
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -21,9 +24,9 @@ class ProductCard extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () => Navigator.pushNamed(context, '/product-detail',
-                arguments: products[index].heroId),
+                arguments: products[index].id.toString()),
             child: Hero(
-              tag: products[index].heroId,
+              tag: products[index].id.toString(),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
@@ -31,32 +34,42 @@ class ProductCard extends StatelessWidget {
                   color: Colors.white,
                   child: Column(
                     children: [
-                      const FadeInImage(
-                        placeholder: NetworkImage(
-                            "https://bk-latam-prod.s3.amazonaws.com/sites/burgerking.com.py/files/whopper%20tejano.png"),
-                        image: NetworkImage(
-                            "https://bk-latam-prod.s3.amazonaws.com/sites/burgerking.com.py/files/whopper%20tejano.png"),
+                      FadeInImage(
+                        placeholder: const AssetImage("assets/loading.gif"),
+                        image: NetworkImage(products[index].image),
                         height: 90,
                       ),
                       SizedBox(
                         height: 40,
                         child: Text(
-                          products[index].name,
+                          products[index].title,
                           textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: const TextStyle(fontSize: 14),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
                         ),
                       ),
-                      Text(
-                        products[index].price,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: themePrimaryColor,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "\$",
+                            style: TextStyle(
+                              color: themePrimaryColor,
+                              fontSize: 13,
+                            ),
+                          ),
+                          const SizedBox(width: 2),
+                          Text(
+                            products[index].price.toString(),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: themePrimaryColor,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

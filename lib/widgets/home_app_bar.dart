@@ -21,7 +21,7 @@ class CustomAppBar extends StatelessWidget {
           const Column(
             children: [
               Text(
-                "Ubicacion actual",
+                "Location",
                 style: TextStyle(
                   color: Colors.grey,
                   fontSize: 13,
@@ -31,7 +31,7 @@ class CustomAppBar extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.map,
-                    color: Colors.orange,
+                    color: Colors.blueGrey,
                   ),
                   Text(
                     "Ypacarai, Paraguay",
