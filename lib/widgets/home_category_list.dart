@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_delivery/models/models.dart';
-import 'package:flutter_delivery/theme/app_theme.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_delivery/theme/app_theme.dart';
+import 'package:flutter_delivery/providers/providers.dart';
+import 'package:provider/provider.dart';
 
 class CategoryList extends StatelessWidget {
-  final categories = <Category>[
-    Category(true, FontAwesomeIcons.burger, "Hamburguesas"),
-    Category(false, FontAwesomeIcons.pizzaSlice, "Pizza"),
-    Category(false, FontAwesomeIcons.drumstickBite, "Pollo"),
-    Category(false, FontAwesomeIcons.pepperHot, "Tacos"),
-    Category(false, FontAwesomeIcons.martiniGlass, "Bebidas"),
-  ];
-
   CategoryList({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final categories = Provider.of<CategoryProvider>(context).getAllCategory();
+
     return Container(
       height: 50,
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

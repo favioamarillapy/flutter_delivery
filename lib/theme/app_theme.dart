@@ -1,3 +1,3 @@
 import 'package:flutter/material.dart';
 
-var themePrimaryColor = const Color.fromRGBO(254, 78, 2, 1);
+var themePrimaryColor = const Color.fromARGB(255, 3, 40, 110);

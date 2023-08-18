@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_delivery/providers/providers.dart';
 import 'package:flutter_delivery/screens/screens.dart';
 import 'package:flutter_delivery/theme/app_theme.dart';
+import 'package:provider/provider.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => CategoryProvider()),
+        ],
+        child: const DeliveryApp(),
+      ),
+    );
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class DeliveryApp extends StatelessWidget {
+  const DeliveryApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Delivery App',
-      initialRoute: "/tracking",
+      //initialRoute: "/tracking",
       routes: {
         "/": (context) => const HomeScreen(),
         "/product-detail": (context) => const ProductDetailScreen(),
