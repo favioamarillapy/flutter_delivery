@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_delivery/theme/app_theme.dart';
-import 'package:flutter_delivery/data/products.dart';
 import 'package:flutter_delivery/models/models.dart';
 import 'package:flutter_delivery/widgets/widgets.dart';
 
@@ -9,10 +8,8 @@ class ProductDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String heroId = ModalRoute.of(context)!.settings.arguments as String;
-
-    final Product product =
-        products.firstWhere((Product user) => user.heroId == heroId);
+    final ProductResponse product =
+        ModalRoute.of(context)!.settings.arguments as ProductResponse;
 
     return Scaffold(
       body: SafeArea(
@@ -20,7 +17,7 @@ class ProductDetailScreen extends StatelessWidget {
           children: [
             Stack(
               children: [
-                _PosterImage(heroId),
+                _PosterImage(product),
                 const _PosterButtons(),
               ],
             ),
@@ -30,8 +27,6 @@ class ProductDetailScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     _Title(product),
-                    const _Sizes(),
-                    const SizedBox(height: 20),
                     _Description(product),
                   ],
                 ),
@@ -46,22 +41,22 @@ class ProductDetailScreen extends StatelessWidget {
 }
 
 class _PosterImage extends StatelessWidget {
-  final String heroId;
+  final ProductResponse product;
 
-  const _PosterImage(this.heroId);
+  const _PosterImage(this.product);
 
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: heroId,
-      child: Container(
-        width: double.infinity,
-        color: const Color.fromARGB(125, 240, 236, 236),
-        child: const FadeInImage(
-          placeholder: NetworkImage(
-              "https://bk-latam-prod.s3.amazonaws.com/sites/burgerking.com.py/files/whopper%20tejano.png"),
-          image: NetworkImage(
-              "https://bk-latam-prod.s3.amazonaws.com/sites/burgerking.com.py/files/whopper%20tejano.png"),
+    return Container(
+      padding: const EdgeInsets.all(50),
+      width: double.infinity,
+      height: 300,
+      color: Colors.white,
+      child: Hero(
+        tag: "product-${product.id}",
+        child: FadeInImage(
+          placeholder: const AssetImage("assets/loading.gif"),
+          image: NetworkImage(product.image),
         ),
       ),
     );
@@ -98,7 +93,7 @@ class _PosterButtons extends StatelessWidget {
 }
 
 class _Title extends StatelessWidget {
-  final Product product;
+  final ProductResponse product;
 
   const _Title(this.product);
 
@@ -109,12 +104,12 @@ class _Title extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Expanded(
+          Expanded(
             child: Text(
-              "Whopper",
+              product.title,
               overflow: TextOverflow.ellipsis,
-              maxLines: 2,
-              style: TextStyle(
+              maxLines: 3,
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
@@ -144,80 +139,21 @@ class _Title extends StatelessWidget {
 }
 
 class _Description extends StatelessWidget {
-  final Product product;
+  final ProductResponse product;
 
   const _Description(this.product);
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      "Medallón 100% de carne vacuna a la parrilla, pan con semillas de sésamo, ketchup, pepinos, cebolla y tomate.",
-      style: TextStyle(
-        color: Colors.grey,
-      ),
-      textAlign: TextAlign.justify,
-    );
-  }
-}
-
-class _Sizes extends StatelessWidget {
-  const _Sizes();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          _PropertieSection("Tamaño", "Mediano"),
-          VerticalDivider(
-            width: 20,
-            thickness: 1,
-            indent: 20,
-            endIndent: 0,
-            color: Colors.red,
-          ),
-          _PropertieSection("Calorias", "150 Kcal"),
-          VerticalDivider(
-            width: 20,
-            thickness: 1,
-            indent: 20,
-            endIndent: 0,
-            color: Colors.red,
-          ),
-          _PropertieSection("Cocina", "5 - 10 Min."),
-        ],
-      ),
-    );
-  }
-}
-
-class _PropertieSection extends StatelessWidget {
-  final String title;
-  final String subTitle;
-
-  const _PropertieSection(this.title, this.subTitle);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          title,
-          style: const TextStyle(
-            color: Colors.grey,
-            fontSize: 15,
-          ),
+    return Padding(
+      padding: const EdgeInsets.only(top: 10),
+      child: Text(
+        product.description,
+        style: const TextStyle(
+          color: Colors.grey,
         ),
-        Text(
-          subTitle,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-          ),
-        ),
-      ],
+        textAlign: TextAlign.justify,
+      ),
     );
   }
 }

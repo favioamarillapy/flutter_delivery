@@ -16,7 +16,7 @@ class CustomAppBar extends StatelessWidget {
           CustomIconButton(
             icon: FontAwesomeIcons.bars,
             color: Colors.white70,
-            onPressed: () {},
+            onPressed: () => Scaffold.of(context).openDrawer(),
           ),
           const Column(
             children: [

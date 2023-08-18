@@ -76,6 +76,32 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: const BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: GestureDetector(
+                onTap: () => Navigator.pushNamed(context, "/tracking"),
+                child: const Text(
+                  'Demo Delivery',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                  ),
+                ),
+              ),
+            ),
+            ListTile(
+              title: const Text('Tracking'),
+              onTap: () {},
+            ),
+          ],
+        ),
+      ),
       extendBody: true,
       body: Column(
         children: [

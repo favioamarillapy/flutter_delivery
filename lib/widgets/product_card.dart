@@ -24,55 +24,55 @@ class ProductCard extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () => Navigator.pushNamed(context, '/product-detail',
-                arguments: products[index].id.toString()),
-            child: Hero(
-              tag: products[index].id.toString(),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  color: Colors.white,
-                  child: Column(
-                    children: [
-                      FadeInImage(
+                arguments: products[index]),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                color: Colors.white,
+                child: Column(
+                  children: [
+                    Hero(
+                      tag: "product-${products[index].id}",
+                      child: FadeInImage(
                         placeholder: const AssetImage("assets/loading.gif"),
                         image: NetworkImage(products[index].image),
                         height: 90,
                       ),
-                      SizedBox(
-                        height: 40,
-                        child: Text(
-                          products[index].title,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(fontSize: 14),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
+                    ),
+                    SizedBox(
+                      height: 40,
+                      child: Text(
+                        products[index].title,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontSize: 14),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "\$",
+                          style: TextStyle(
+                            color: themePrimaryColor,
+                            fontSize: 13,
+                          ),
                         ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "\$",
-                            style: TextStyle(
-                              color: themePrimaryColor,
-                              fontSize: 13,
-                            ),
+                        const SizedBox(width: 2),
+                        Text(
+                          products[index].price.toString(),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: themePrimaryColor,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
                           ),
-                          const SizedBox(width: 2),
-                          Text(
-                            products[index].price.toString(),
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: themePrimaryColor,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
