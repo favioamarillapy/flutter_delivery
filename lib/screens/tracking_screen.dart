@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_delivery/widgets/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -186,8 +188,18 @@ class _DeliveryData extends StatelessWidget {
   }
 }
 
-class _HeaderMap extends StatelessWidget {
+class _HeaderMap extends StatefulWidget {
   const _HeaderMap();
+
+  @override
+  State<_HeaderMap> createState() => _HeaderMapState();
+}
+
+class _HeaderMapState extends State<_HeaderMap> {
+  final Completer<GoogleMapController> _controller = Completer();
+  static const LatLng sourceLocation =
+      LatLng(-25.403115077603463, -57.288019043578366);
+  static const LatLng destination = LatLng(-25.413613, -57.297989);
 
   @override
   Widget build(BuildContext context) {
@@ -198,13 +210,17 @@ class _HeaderMap extends StatelessWidget {
         onMapCreated: (GoogleMapController controller) {},
         initialCameraPosition: const CameraPosition(
           target: LatLng(-25.413613, -57.297989),
-          zoom: 17,
+          zoom: 16,
         ),
         markers: {
           const Marker(
-            markerId: MarkerId('Ypacarai'),
-            position: LatLng(-25.413613, -57.297989),
-          )
+            markerId: MarkerId("source"),
+            position: sourceLocation,
+          ),
+          const Marker(
+            markerId: MarkerId("destination"),
+            position: destination,
+          ),
         },
       ),
     );

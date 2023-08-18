@@ -5,31 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_delivery/widgets/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-/*
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          const SizedBox(height: 10),
-          const CustomAppBar(),
-          const PromotioCard(),
-          CategoryList(),
-        ],
-      ),
-    );
-  }
-}
-*/
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -39,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final autoSizeGroup = AutoSizeGroup();
-  var _bottomNavIndex = 0; //default index of a first screen
+  var _bottomNavIndex = 0;
 
   late AnimationController _fabAnimationController;
   late AnimationController _borderRadiusAnimationController;

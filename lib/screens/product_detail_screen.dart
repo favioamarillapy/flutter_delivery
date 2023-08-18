@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_delivery/data/products.dart';
+import 'package:flutter_delivery/models/models.dart';
 import 'package:flutter_delivery/widgets/widgets.dart';
 
 class ProductDetailScreen extends StatelessWidget {
@@ -6,30 +8,35 @@ class ProductDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    final String heroId = ModalRoute.of(context)!.settings.arguments as String;
+
+    final Product product =
+        products.firstWhere((Product user) => user.heroId == heroId);
+
+    return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
             Stack(
               children: [
-                _PosterImage(),
-                _PosterButtons(),
+                _PosterImage(heroId),
+                const _PosterButtons(),
               ],
             ),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   children: [
-                    _Title(),
-                    _Sizes(),
-                    SizedBox(height: 20),
-                    _Description(),
+                    _Title(product),
+                    const _Sizes(),
+                    const SizedBox(height: 20),
+                    _Description(product),
                   ],
                 ),
               ),
             ),
-            _PriceSection(),
+            const _PriceSection(),
           ],
         ),
       ),
@@ -38,18 +45,23 @@ class ProductDetailScreen extends StatelessWidget {
 }
 
 class _PosterImage extends StatelessWidget {
-  const _PosterImage();
+  final String heroId;
+
+  const _PosterImage(this.heroId);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      color: const Color.fromARGB(125, 240, 236, 236),
-      child: const FadeInImage(
-        placeholder: NetworkImage(
-            "https://bk-latam-prod.s3.amazonaws.com/sites/burgerking.com.py/files/whopper%20tejano.png"),
-        image: NetworkImage(
-            "https://bk-latam-prod.s3.amazonaws.com/sites/burgerking.com.py/files/whopper%20tejano.png"),
+    return Hero(
+      tag: heroId,
+      child: Container(
+        width: double.infinity,
+        color: const Color.fromARGB(125, 240, 236, 236),
+        child: const FadeInImage(
+          placeholder: NetworkImage(
+              "https://bk-latam-prod.s3.amazonaws.com/sites/burgerking.com.py/files/whopper%20tejano.png"),
+          image: NetworkImage(
+              "https://bk-latam-prod.s3.amazonaws.com/sites/burgerking.com.py/files/whopper%20tejano.png"),
+        ),
       ),
     );
   }
@@ -85,7 +97,9 @@ class _PosterButtons extends StatelessWidget {
 }
 
 class _Title extends StatelessWidget {
-  const _Title();
+  final Product product;
+
+  const _Title(this.product);
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +143,9 @@ class _Title extends StatelessWidget {
 }
 
 class _Description extends StatelessWidget {
-  const _Description();
+  final Product product;
+
+  const _Description(this.product);
 
   @override
   Widget build(BuildContext context) {
