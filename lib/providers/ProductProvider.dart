@@ -7,14 +7,19 @@ import 'package:flutter_delivery/models/models.dart';
 
 class ProductProvider with ChangeNotifier {
   final String _baseUrl = "fakestoreapi.com";
+
   List<ProductResponse> products = [];
+  bool isLoading = false;
 
   ProductProvider() {
-    getAllProduct();
+    getAllProduct("electronics");
   }
 
-  getAllProduct() async {
-    final url = Uri.https(_baseUrl, '/products/category/electronics');
+  getAllProduct(String category) async {
+    isLoading = true;
+    notifyListeners();
+
+    final url = Uri.https(_baseUrl, '/products/category/$category');
     final response =
         await http.get(url, headers: {'accept': 'application/json'});
 
@@ -25,6 +30,7 @@ class ProductProvider with ChangeNotifier {
       Exception("Product provider error");
     }
 
+    isLoading = false;
     notifyListeners();
   }
 }

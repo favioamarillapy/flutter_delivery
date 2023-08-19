@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Category {
-  final bool selected;
+  bool selected;
   final IconData icon;
   final String label;
   final String code;
