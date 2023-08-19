@@ -12,6 +12,10 @@ class CategoryProvider with ChangeNotifier {
         false, FontAwesomeIcons.personDress, "Women's", "women's clothing"),
   ];
 
+  CategoryProvider() {
+    categories[0].selected = true;
+  }
+
   cahngeSelected(index) {
     for (var element in categories) {
       element.selected = false;
