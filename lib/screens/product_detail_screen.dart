@@ -21,7 +21,7 @@ class ProductDetailScreen extends StatelessWidget {
             Stack(
               children: [
                 _PosterImage(product),
-                const _PosterButtons(),
+                _PosterButtons(product.id),
               ],
             ),
             Expanded(
@@ -67,11 +67,13 @@ class _PosterImage extends StatelessWidget {
 }
 
 class _PosterButtons extends StatelessWidget {
-  const _PosterButtons();
+  final int productId;
+  const _PosterButtons(this.productId);
 
   @override
   Widget build(BuildContext context) {
-    var favorite = Provider.of<FavoriteProvider>(context).favorite;
+    var favoriteProvider = Provider.of<FavoriteProvider>(context);
+    List<Favorite> favorite = favoriteProvider.favorite;
 
     Color heartColor = favorite.isEmpty ? Colors.black : Colors.red;
     IconData heartIcon =
@@ -93,7 +95,9 @@ class _PosterButtons extends StatelessWidget {
               icon: heartIcon,
               iconColor: heartColor,
               color: Colors.white70,
-              onPressed: () {},
+              onPressed: () => favorite.isEmpty
+                  ? favoriteProvider.insertFavorite(productId)
+                  : favoriteProvider.deleteFavorite(favorite[0].id!),
             ),
           ],
         ),

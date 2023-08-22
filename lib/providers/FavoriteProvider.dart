@@ -11,8 +11,16 @@ class FavoriteProvider with ChangeNotifier {
   }
 
   insertFavorite(int productId) async {
-    Favorite favorite = Favorite(id: null, productid: productId, quantity: 0);
-    await dbHelper.insertFavorite(favorite);
+    Favorite row = Favorite(id: null, productid: productId, quantity: 0);
+    await dbHelper.insertFavorite(row);
+    getFavorite(productId);
+
+    notifyListeners();
+  }
+
+  deleteFavorite(int id) async {
+    await dbHelper.deleteFavorite(id);
+    favorite = [];
     notifyListeners();
   }
 }

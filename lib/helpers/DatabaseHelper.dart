@@ -64,8 +64,12 @@ class DatabaseHelper {
     return await database.insert("favorite", row.toJson());
   }
 
-  Future<int> updateFavorite(Favorite row) async {
+  Future<int> deleteFavorite(int id) async {
     var database = await db();
-    return await database.insert("favorite", row.toJson());
+    return await database.delete(
+      "favorite",
+      where: 'id = ?',
+      whereArgs: [id],
+    );
   }
 }
