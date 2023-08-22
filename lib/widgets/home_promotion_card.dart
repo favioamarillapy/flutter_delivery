@@ -23,7 +23,7 @@ class PromotionCard extends StatelessWidget {
                   initialPage: 0,
                   enableInfiniteScroll: true,
                   reverse: false,
-                  autoPlay: false,
+                  autoPlay: true,
                   autoPlayInterval: const Duration(seconds: 5),
                   autoPlayAnimationDuration: const Duration(seconds: 2),
                   autoPlayCurve: Curves.fastOutSlowIn,
