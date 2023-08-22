@@ -25,45 +25,47 @@ class DatabaseHelper {
     }
   }
 
-  Future<int> insert(Map<String, dynamic> row) async {
+  // promotions
+  Future<List<Promotion>> getAllPromotion() async {
+    var database = await db();
+    var results = await database.query("promotions");
+
+    List<Promotion> list = results.isNotEmpty
+        ? results.map((e) => Promotion.fromJson(e)).toList()
+        : [];
+    return list;
+  }
+
+  Future<int> insertPromotion(Map<String, dynamic> row) async {
     var database = await db();
     return await database.insert("promotions", row);
   }
 
-  Future<List<Promotion>> queryAllRows() async {
-    var database = await db();
-    var res = await database.query("promotions");
-
-    print(res.toString());
-
-    List<Promotion> list =
-        res.isNotEmpty ? res.map((e) => Promotion.fromJson(e)).toList() : [];
-    return list;
-  }
-
-  Future<int> queryRowCount() async {
+  Future<int> queryRowCountPromotion() async {
     var database = await db();
     final results = await database.rawQuery('SELECT COUNT(*) FROM promotions');
     return Sqflite.firstIntValue(results) ?? 0;
   }
 
-  Future<int> update(Map<String, dynamic> row) async {
+  // favorite
+  Future<List<Favorite>> getFavorite(int productid) async {
     var database = await db();
-    int id = row["id"];
-    return await database.update(
-      "promotions",
-      row,
-      where: 'id = ?',
-      whereArgs: [id],
-    );
+    final results = await database
+        .rawQuery('SELECT * FROM favorite where productid = ?', [productid]);
+
+    List<Favorite> list = results.isNotEmpty
+        ? results.map((e) => Favorite.fromJson(e)).toList()
+        : [];
+    return list;
   }
 
-  Future<int> delete(int id) async {
+  Future<int> insertFavorite(Favorite row) async {
     var database = await db();
-    return await database.delete(
-      "promotions",
-      where: 'id = ?',
-      whereArgs: [id],
-    );
+    return await database.insert("favorite", row.toJson());
+  }
+
+  Future<int> updateFavorite(Favorite row) async {
+    var database = await db();
+    return await database.insert("favorite", row.toJson());
   }
 }

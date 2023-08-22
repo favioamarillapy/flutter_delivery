@@ -12,7 +12,7 @@ class PromotionProvider with ChangeNotifier {
   }
 
   getAllPromotions() async {
-    promotions = await dbHelper.queryAllRows();
+    promotions = await dbHelper.getAllPromotion();
 
     notifyListeners();
   }

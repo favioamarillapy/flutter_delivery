@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_delivery/providers/providers.dart';
 import 'package:flutter_delivery/theme/app_theme.dart';
 import 'package:flutter_delivery/models/models.dart';
 import 'package:flutter_delivery/widgets/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   const ProductDetailScreen({super.key});
@@ -68,6 +71,12 @@ class _PosterButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var favorite = Provider.of<FavoriteProvider>(context).favorite;
+
+    Color heartColor = favorite.isEmpty ? Colors.black : Colors.red;
+    IconData heartIcon =
+        favorite.isEmpty ? FontAwesomeIcons.heart : FontAwesomeIcons.solidHeart;
+
     return Padding(
       padding: const EdgeInsets.only(top: 15),
       child: Padding(
@@ -76,12 +85,13 @@ class _PosterButtons extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             CustomIconButton(
-              icon: Icons.arrow_back,
+              icon: FontAwesomeIcons.arrowLeft,
               color: Colors.white70,
               onPressed: () => Navigator.of(context).pop(),
             ),
             CustomIconButton(
-              icon: Icons.favorite_border_sharp,
+              icon: heartIcon,
+              iconColor: heartColor,
               color: Colors.white70,
               onPressed: () {},
             ),

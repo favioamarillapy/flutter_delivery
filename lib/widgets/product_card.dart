@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_delivery/providers/ProductProvider.dart';
+import 'package:flutter_delivery/providers/providers.dart';
 import 'package:flutter_delivery/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
@@ -32,8 +32,13 @@ class ProductCard extends StatelessWidget {
               itemCount: products.length,
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
-                  onTap: () => Navigator.pushNamed(context, '/product-detail',
-                      arguments: products[index]),
+                  onTap: () {
+                    Provider.of<FavoriteProvider>(context, listen: false)
+                        .getFavorite(products[index].id);
+
+                    Navigator.pushNamed(context, '/product-detail',
+                        arguments: products[index]);
+                  },
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Container(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_delivery/helpers/DatabaseHelper.dart';
-import 'package:flutter_delivery/providers/PromotionProvider.dart';
 import 'package:flutter_delivery/providers/providers.dart';
 import 'package:flutter_delivery/screens/screens.dart';
 import 'package:flutter_delivery/theme/app_theme.dart';
@@ -13,14 +12,15 @@ void main() async {
         ChangeNotifierProvider(create: (_) => CategoryProvider()),
         ChangeNotifierProvider(create: (_) => ProductProvider()),
         ChangeNotifierProvider(create: (_) => PromotionProvider()),
+        ChangeNotifierProvider(create: (_) => FavoriteProvider()),
       ],
       child: const DeliveryApp(),
     ),
   );
 
   final dbHelper = DatabaseHelper();
-  if (await dbHelper.queryRowCount() == 0) {
-    await dbHelper.insert({
+  if (await dbHelper.queryRowCountPromotion() == 0) {
+    await dbHelper.insertPromotion({
       "title": "Discounts on electronics",
       "subtitle": "",
       "discount": "20",
@@ -28,7 +28,7 @@ void main() async {
           "https://nissei.com/media/catalog/product/cache/16a9529cefd63504739dab4fc3414065/h/p/hp_15-ef2729wm_-_1.jpg"
     });
 
-    await dbHelper.insert({
+    await dbHelper.insertPromotion({
       "title": "Discounts on Men's",
       "subtitle": "",
       "discount": "30",
@@ -36,7 +36,7 @@ void main() async {
           "https://www.mrporter.com/variants/images/3633577411310824/in/w2000_q60.jpg"
     });
 
-    await dbHelper.insert({
+    await dbHelper.insertPromotion({
       "title": "Discounts on Women's",
       "subtitle": "",
       "discount": "40",
