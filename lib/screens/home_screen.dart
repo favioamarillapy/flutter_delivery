@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_delivery/theme/app_theme.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:circular_reveal_animation/circular_reveal_animation.dart';
 import 'package:flutter_delivery/widgets/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -35,6 +37,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+
+    _loadPermisos();
 
     _fabAnimationController = AnimationController(
       duration: const Duration(milliseconds: 500),
@@ -73,6 +77,17 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
+  _loadPermisos() async {
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.location,
+    ].request();
+
+    print(statuses[Permission.location]);
+    if (statuses[Permission.location] == PermissionStatus.denied) {
+      SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,14 +115,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         ),
       ),
       extendBody: true,
-      body: Column(
-        children: [
-          const SizedBox(height: 15),
-          const CustomAppBar(),
-          const PromotionCard(),
-          CategoryList(),
-          ProductCard()
-        ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            const CustomAppBar(),
+            const PromotionCard(),
+            CategoryList(),
+            ProductCard()
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(
