@@ -106,10 +106,17 @@ class _PosterButtons extends StatelessWidget {
   }
 }
 
-class _Title extends StatelessWidget {
+class _Title extends StatefulWidget {
   final ProductResponse product;
 
   const _Title(this.product);
+
+  @override
+  State<_Title> createState() => _TitleState();
+}
+
+class _TitleState extends State<_Title> {
+  late int quantity = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +127,7 @@ class _Title extends StatelessWidget {
         children: [
           Expanded(
             child: Text(
-              product.title,
+              widget.product.title,
               overflow: TextOverflow.ellipsis,
               maxLines: 3,
               style: const TextStyle(
@@ -134,15 +141,25 @@ class _Title extends StatelessWidget {
               CustomIconButton(
                 icon: Icons.add,
                 color: const Color.fromARGB(125, 240, 236, 236),
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    quantity = quantity + 1;
+                  });
+                },
               ),
               const SizedBox(width: 12),
-              Text(1.toString()),
+              Text(quantity.toString()),
               const SizedBox(width: 12),
               CustomIconButton(
                 icon: Icons.remove,
                 color: const Color.fromARGB(125, 240, 236, 236),
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    if (quantity > 0) {
+                      quantity = quantity - 1;
+                    }
+                  });
+                },
               ),
             ],
           )
