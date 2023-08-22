@@ -1,8 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_delivery/models/models.dart';
+import 'package:provider/provider.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_delivery/providers/PromotionProvider.dart';
 import 'package:flutter_delivery/theme/app_theme.dart';
 
-class PromotioCard extends StatelessWidget {
-  const PromotioCard({super.key});
+class PromotionCard extends StatelessWidget {
+  const PromotionCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final promotions = Provider.of<PromotionProvider>(context).promotions;
+
+    return promotions.isNotEmpty
+        ? CarouselSlider.builder(
+            options: CarouselOptions(
+              height: 150,
+              aspectRatio: 16 / 9,
+              viewportFraction: 0.8,
+              initialPage: 0,
+              enableInfiniteScroll: true,
+              reverse: false,
+              autoPlay: true,
+              autoPlayInterval: const Duration(seconds: 5),
+              autoPlayAnimationDuration: const Duration(seconds: 2),
+              autoPlayCurve: Curves.fastOutSlowIn,
+              enlargeCenterPage: true,
+              enlargeFactor: 0.3,
+              scrollDirection: Axis.horizontal,
+            ),
+            itemCount: promotions.length,
+            itemBuilder:
+                (BuildContext context, int itemIndex, int pageViewIndex) =>
+                    _CustomCard(promotions[itemIndex]),
+          )
+        : Container();
+  }
+}
+
+class _CustomCard extends StatelessWidget {
+  final Promotion promotion;
+
+  const _CustomCard(this.promotion);
 
   @override
   Widget build(BuildContext context) {
@@ -20,20 +59,20 @@ class PromotioCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Discounts on electronics",
+                  Text(
+                    promotion.title.toString(),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 20,
                     ),
                   ),
-                  const Text(
-                    "30%",
+                  Text(
+                    "${promotion.discount.toString()}%",
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 40,
@@ -43,7 +82,10 @@ class PromotioCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(50),
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 40, vertical: 0),
+                        horizontal: 40,
+                        vertical: 0,
+                      ),
+                      height: 40,
                       color: Colors.white,
                       child: TextButton(
                         onPressed: () {},
@@ -59,12 +101,12 @@ class PromotioCard extends StatelessWidget {
                   ),
                 ],
               ),
-              const Positioned(
+              /*const Positioned(
                 child: Image(
                   image: NetworkImage(
                       "https://static.vecteezy.com/system/resources/previews/010/869/748/original/laptop-computer-or-notebook-with-blank-screen-png.png"),
                 ),
-              ),
+              ),*/
             ],
           ),
         ),

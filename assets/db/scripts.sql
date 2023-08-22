@@ -1,0 +1,1 @@
+ CREATE TABLE promotions (id INTEGER PRIMARY KEY, title TEXT NOT NULL, subtitle TEXT NOT NULL, discount TEXT NOT NULL, image TEXT NOT NULL);
