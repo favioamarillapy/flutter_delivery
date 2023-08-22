@@ -11,7 +11,7 @@ class FavoriteProvider with ChangeNotifier {
   }
 
   insertFavorite(int productId) async {
-    Favorite row = Favorite(id: null, productid: productId, quantity: 0);
+    Favorite row = Favorite(id: null, productid: productId);
     await dbHelper.insertFavorite(row);
     getFavorite(productId);
 
