@@ -47,6 +47,8 @@ dependencies:
   path_provider: ^2.1.0
   carousel_slider: ^4.2.1
   permission_handler: ^10.4.3
+  geolocator: ^7.0.3
+  geocoding: ^2.1.0
 
 dev_dependencies:
   flutter_test:
