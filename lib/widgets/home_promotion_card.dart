@@ -10,9 +10,10 @@ class PromotionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLoading = Provider.of<PromotionProvider>(context).isLoading;
     final promotions = Provider.of<PromotionProvider>(context).promotions;
 
-    return promotions.isNotEmpty
+    return !isLoading
         ? CarouselSlider.builder(
             options: CarouselOptions(
               height: 150,
@@ -21,7 +22,7 @@ class PromotionCard extends StatelessWidget {
               initialPage: 0,
               enableInfiniteScroll: true,
               reverse: false,
-              autoPlay: false,
+              autoPlay: true,
               autoPlayInterval: const Duration(seconds: 5),
               autoPlayAnimationDuration: const Duration(seconds: 2),
               autoPlayCurve: Curves.fastOutSlowIn,
@@ -34,7 +35,12 @@ class PromotionCard extends StatelessWidget {
                 (BuildContext context, int itemIndex, int pageViewIndex) =>
                     _CustomCard(promotions[itemIndex]),
           )
-        : Container();
+        : Container(
+            width: double.infinity,
+            height: 150,
+            padding: const EdgeInsets.symmetric(horizontal: 185, vertical: 55),
+            child: const CircularProgressIndicator(),
+          );
   }
 }
 

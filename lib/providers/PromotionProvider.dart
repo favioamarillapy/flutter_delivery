@@ -1,19 +1,28 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_delivery/helpers/DatabaseHelper.dart';
 import 'package:flutter_delivery/models/models.dart';
 
 class PromotionProvider with ChangeNotifier {
-  final dbHelper = DatabaseHelper();
   List<Promotion> promotions = [];
   bool isLoading = false;
+
+  final dbHelper = DatabaseHelper();
 
   PromotionProvider() {
     getAllPromotions();
   }
 
   getAllPromotions() async {
-    promotions = await dbHelper.getAllPromotion();
-
+    isLoading = true;
     notifyListeners();
+
+    Timer.periodic(Duration(seconds: 2), (timer) async {
+      promotions = await dbHelper.getAllPromotion();
+
+      isLoading = false;
+      notifyListeners();
+    });
   }
 }
