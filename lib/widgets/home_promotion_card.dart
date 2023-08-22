@@ -35,12 +35,7 @@ class PromotionCard extends StatelessWidget {
                 (BuildContext context, int itemIndex, int pageViewIndex) =>
                     _CustomCard(promotions[itemIndex]),
           )
-        : Container(
-            width: double.infinity,
-            height: 150,
-            padding: const EdgeInsets.symmetric(horizontal: 185, vertical: 55),
-            child: const CircularProgressIndicator(),
-          );
+        : CircularProgressIndicator(color: themePrimaryColor);
   }
 }
 

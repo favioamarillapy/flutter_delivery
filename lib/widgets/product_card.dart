@@ -12,13 +12,7 @@ class ProductCard extends StatelessWidget {
     final products = Provider.of<ProductProvider>(context).products;
 
     return isLoading
-        ? Expanded(
-            child: Center(
-              child: CircularProgressIndicator(
-                color: themePrimaryColor,
-              ),
-            ),
-          )
+        ? CircularProgressIndicator(color: themePrimaryColor)
         : Expanded(
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
