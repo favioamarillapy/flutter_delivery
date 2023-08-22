@@ -116,10 +116,26 @@ class _Title extends StatefulWidget {
 }
 
 class _TitleState extends State<_Title> {
-  late int quantity = 0;
+  late CartProvider cartProvider =
+      Provider.of<CartProvider>(context, listen: false);
+
+  late List<Cart> cart = cartProvider.cart;
+  late int quantity = cart.isNotEmpty ? cart[0].quantity : 0;
+
+  _processCart(BuildContext context) async {
+    if (cart.isEmpty) {
+      await cartProvider.insertCart(widget.product.id, quantity);
+    } else {
+      await cartProvider.updateCart(cart[0].id!, widget.product.id, quantity);
+    }
+    cart = cartProvider.cart;
+  }
 
   @override
   Widget build(BuildContext context) {
+    print("cart" + cart.toString());
+    print("cart.length" + cart.length.toString());
+
     return Padding(
       padding: const EdgeInsets.only(top: 10),
       child: Row(
@@ -144,6 +160,7 @@ class _TitleState extends State<_Title> {
                 onPressed: () {
                   setState(() {
                     quantity = quantity + 1;
+                    _processCart(context);
                   });
                 },
               ),
@@ -157,6 +174,7 @@ class _TitleState extends State<_Title> {
                   setState(() {
                     if (quantity > 0) {
                       quantity = quantity - 1;
+                      _processCart(context);
                     }
                   });
                 },

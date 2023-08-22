@@ -30,6 +30,9 @@ class ProductCard extends StatelessWidget {
                     Provider.of<FavoriteProvider>(context, listen: false)
                         .getFavorite(products[index].id);
 
+                    Provider.of<CartProvider>(context, listen: false)
+                        .getCart(products[index].id);
+
                     Navigator.pushNamed(context, '/product-detail',
                         arguments: products[index]);
                   },

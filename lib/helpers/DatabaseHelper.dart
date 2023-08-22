@@ -72,4 +72,30 @@ class DatabaseHelper {
       whereArgs: [id],
     );
   }
+
+  // cart
+  Future<List<Cart>> getCart(int productid) async {
+    var database = await db();
+    final results = await database
+        .rawQuery('SELECT * FROM cart where productid = ?', [productid]);
+
+    List<Cart> list =
+        results.isNotEmpty ? results.map((e) => Cart.fromJson(e)).toList() : [];
+    return list;
+  }
+
+  Future<int> insertCart(Cart row) async {
+    var database = await db();
+    return await database.insert("cart", row.toJson());
+  }
+
+  Future<int> updateCart(int id, Cart row) async {
+    var database = await db();
+    return await database.update(
+      "cart",
+      row.toJson(),
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
 }

@@ -14,27 +14,29 @@ class PromotionCard extends StatelessWidget {
     final promotions = Provider.of<PromotionProvider>(context).promotions;
 
     return !isLoading
-        ? CarouselSlider.builder(
-            options: CarouselOptions(
-              height: 150,
-              aspectRatio: 16 / 9,
-              viewportFraction: 0.8,
-              initialPage: 0,
-              enableInfiniteScroll: true,
-              reverse: false,
-              autoPlay: false,
-              autoPlayInterval: const Duration(seconds: 5),
-              autoPlayAnimationDuration: const Duration(seconds: 2),
-              autoPlayCurve: Curves.fastOutSlowIn,
-              enlargeCenterPage: true,
-              enlargeFactor: 0.3,
-              scrollDirection: Axis.horizontal,
-            ),
-            itemCount: promotions.length,
-            itemBuilder:
-                (BuildContext context, int itemIndex, int pageViewIndex) =>
-                    _CustomCard(promotions[itemIndex]),
-          )
+        ? promotions.isNotEmpty
+            ? CarouselSlider.builder(
+                options: CarouselOptions(
+                  height: 150,
+                  aspectRatio: 16 / 9,
+                  viewportFraction: 0.8,
+                  initialPage: 0,
+                  enableInfiniteScroll: true,
+                  reverse: false,
+                  autoPlay: false,
+                  autoPlayInterval: const Duration(seconds: 5),
+                  autoPlayAnimationDuration: const Duration(seconds: 2),
+                  autoPlayCurve: Curves.fastOutSlowIn,
+                  enlargeCenterPage: true,
+                  enlargeFactor: 0.3,
+                  scrollDirection: Axis.horizontal,
+                ),
+                itemCount: promotions.length,
+                itemBuilder:
+                    (BuildContext context, int itemIndex, int pageViewIndex) =>
+                        _CustomCard(promotions[itemIndex]),
+              )
+            : Container()
         : CircularProgressIndicator(color: themePrimaryColor);
   }
 }

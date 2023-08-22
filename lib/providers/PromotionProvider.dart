@@ -18,11 +18,8 @@ class PromotionProvider with ChangeNotifier {
     isLoading = true;
     notifyListeners();
 
-    Timer.periodic(Duration(seconds: 2), (timer) async {
-      promotions = await dbHelper.getAllPromotion();
-
-      isLoading = false;
-      notifyListeners();
-    });
+    promotions = await dbHelper.getAllPromotion();
+    isLoading = false;
+    notifyListeners();
   }
 }
