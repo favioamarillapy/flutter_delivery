@@ -18,6 +18,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final autoSizeGroup = AutoSizeGroup();
   var _bottomNavIndex = 0;
+  var locationEnabled = false;
 
   late AnimationController _fabAnimationController;
   late AnimationController _borderRadiusAnimationController;
@@ -82,9 +83,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       Permission.location,
     ].request();
 
-    print(statuses[Permission.location]);
     if (statuses[Permission.location] == PermissionStatus.denied) {
       SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+    } else {
+      locationEnabled = true;
+      setState(() {});
     }
   }
 
@@ -116,14 +119,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       ),
       extendBody: true,
       body: SafeArea(
-        child: Column(
-          children: [
-            const CustomAppBar(),
-            const PromotionCard(),
-            CategoryList(),
-            ProductCard()
-          ],
-        ),
+        child: locationEnabled
+            ? Column(
+                children: [
+                  const CustomAppBar(),
+                  const PromotionCard(),
+                  CategoryList(),
+                  ProductCard()
+                ],
+              )
+            : Container(),
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(
