@@ -17,6 +17,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
   @override
   void initState() {
     super.initState();
+
     _getLocation();
   }
 
@@ -31,11 +32,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
       }
     } else {
       if (!serviceEnabled) {
-        showDialog(
-            context: context,
-            builder: (BuildContext context) => const Dialog(
-                  child: Text("Plase enabled your location"),
-                ));
+        return Future.error('Please enable location service');
       }
 
       Position position = await Geolocator.getCurrentPosition(
