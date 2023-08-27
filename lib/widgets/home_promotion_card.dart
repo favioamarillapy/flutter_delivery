@@ -88,7 +88,7 @@ class _CustomCard extends StatelessWidget {
                         horizontal: 40,
                         vertical: 0,
                       ),
-                      height: 40,
+                      height: 36,
                       color: Colors.white,
                       child: TextButton(
                         onPressed: () {},
