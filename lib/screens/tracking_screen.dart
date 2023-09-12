@@ -1,9 +1,9 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_delivery/theme/app_theme.dart';
 import 'package:flutter_delivery/widgets/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TrackingScreen extends StatelessWidget {
   const TrackingScreen({super.key});
@@ -62,6 +62,20 @@ class TrackingScreen extends StatelessWidget {
 class _DeliveryTrackingInfo extends StatelessWidget {
   _DeliveryTrackingInfo();
 
+  void _launchGoogleMaps() async {
+    double lat = -25.41349337837772;
+    double lng = -57.29801486507635;
+
+    final Uri googleMapsUrl =
+        Uri.parse("https://www.google.com/maps/search/?api=1&query=$lat,$lng");
+
+    if (await canLaunchUrl(googleMapsUrl)) {
+      await launchUrl(googleMapsUrl);
+    } else {
+      throw 'No se pudo abrir Google Maps. Intente nuevamente más tarde.';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -69,53 +83,52 @@ class _DeliveryTrackingInfo extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CircleAvatar(
-                backgroundImage: AssetImage("assets/tracking.png"),
-              ),
-              const SizedBox(width: 10),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              Row(
                 children: [
-                  Row(
-                    children: [
-                      const Text(
-                        "En camino",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17,
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5),
-                        child: Text(
-                          "|",
-                          style: TextStyle(color: Colors.black54),
-                        ),
-                      ),
-                      Text(
-                        "10 Min.",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17,
-                          color: themePrimaryColor,
-                        ),
-                      ),
-                    ],
-                  ),
                   const Text(
-                    "Calle 13 de Setiembre c/ Rca El Salvador",
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
+                    "En camino",
                     style: TextStyle(
-                      color: Colors.black54,
-                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17,
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 5),
+                    child: Text(
+                      "|",
+                      style: TextStyle(color: Colors.black54),
+                    ),
+                  ),
+                  Text(
+                    "10 Min.",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17,
+                      color: themePrimaryColor,
                     ),
                   ),
                 ],
-              )
+              ),
+              const Text(
+                "Calle 13 de Setiembre c/ Rca El Salvador",
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+                style: TextStyle(
+                  color: Colors.black54,
+                  fontSize: 13,
+                ),
+              ),
             ],
+          ),
+          const SizedBox(width: 10),
+          GestureDetector(
+            onTap: _launchGoogleMaps,
+            child: const CircleAvatar(
+              backgroundImage: AssetImage("assets/maps.png"),
+            ),
           ),
         ],
       ),
@@ -135,11 +148,6 @@ class _DeliveryData extends StatelessWidget {
         children: [
           const Row(
             children: [
-              CircleAvatar(
-                backgroundImage: NetworkImage(
-                    "https://scontent.fasu11-1.fna.fbcdn.net/v/t39.30808-6/313991432_1566225937160926_5527145247371560145_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=zWX8q6DFymgAX-b7eE5&_nc_ht=scontent.fasu11-1.fna&oh=00_AfAWdWrCCUto5NqxBrZ7g69f6F2uUnkWOjQl6N9eNz7aiA&oe=64E3ADC4"),
-              ),
-              SizedBox(width: 10),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -196,16 +204,13 @@ class _HeaderMap extends StatefulWidget {
 }
 
 class _HeaderMapState extends State<_HeaderMap> {
-  final Completer<GoogleMapController> _controller = Completer();
-  static const LatLng sourceLocation =
-      LatLng(-25.403115077603463, -57.288019043578366);
   static const LatLng destination = LatLng(-25.413613, -57.297989);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 400,
+      height: 500,
       child: GoogleMap(
         onMapCreated: (GoogleMapController controller) {},
         initialCameraPosition: const CameraPosition(
@@ -213,10 +218,6 @@ class _HeaderMapState extends State<_HeaderMap> {
           zoom: 16,
         ),
         markers: {
-          const Marker(
-            markerId: MarkerId("source"),
-            position: sourceLocation,
-          ),
           const Marker(
             markerId: MarkerId("destination"),
             position: destination,
